@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { Router } from '@angular/router';
+// Aplicamos estrategia OnPush para optimizar la detección de cambios y mejorar rendimiento
 
 @Component({
   selector: 'app-root',

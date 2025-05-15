@@ -10,6 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgFor } from "@angular/common";
 import { MemberCreateAndEditComponent } from "../../components/member-create-and-edit/member-create-and-edit.component";
 
+// Componente relacionado a la gestión de miembros, extendido para pruebas de backlog/sprints
 @Component({
   selector: 'app-member-management',
   standalone: true,
@@ -21,7 +22,8 @@ export class MemberManagementComponent implements OnInit {
   members: Member[] = [];
 
   constructor(private membersService: MembersService, private dialog: MatDialog) {}
-
+  
+// Manejo de errores: capturamos y mostramos mensaje si falla la carga de miembros
   ngOnInit(): void {
     this.getAllMembers();
   }
