@@ -21,7 +21,8 @@ export class MemberManagementComponent implements OnInit {
   members: Member[] = [];
 
   constructor(private membersService: MembersService, private dialog: MatDialog) {}
-
+  
+// Manejo de errores: capturamos y mostramos mensaje si falla la carga de miembros
   ngOnInit(): void {
     this.getAllMembers();
   }
