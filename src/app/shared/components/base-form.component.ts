@@ -9,6 +9,7 @@ export class BaseFormComponent {
    * @returns True if the control is invalid, false otherwise
    * @protected
    */
+  // Validaciones: configuramos reglas y mensajes personalizados para cada campo del formulario
   protected isInvalidControl(form: FormGroup, controlName: string) {
     return form.controls[controlName].invalid && form.controls[controlName].touched;
   }
