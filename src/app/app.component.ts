@@ -11,8 +11,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { AuthenticationSectionComponent } from './iam/components/authentication-section/authentication-section.component';
-import { AuthenticationService } from './iam/services/authentication.service';
+//import { AuthenticationSectionComponent } from './iam/components/authentication-section/authentication-section.component';
+//import { AuthenticationService } from './iam/services/authentication.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { Router } from '@angular/router';
@@ -30,33 +30,33 @@ import { Router } from '@angular/router';
     MatSidenavModule,
     LanguageSwitcherComponent,
     CommonModule,
-    AuthenticationSectionComponent,
+    //AuthenticationSectionComponent,
     TranslateModule
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'ManageWise';
+  title = 'ManaCores';
   isSignedIn: boolean = false;
   @ViewChild(MatSidenav, { static: true }) sidenav!: MatSidenav;
 
-  options = [
+  /*options = [
     { path: '/authentication', title: 'Authentication' },
-  ];
+  ];*/
 
   otherOptions = [
-    { icon: 'https://cdn-icons-png.flaticon.com/512/87/87578.png', path: '/statistics', title: 'Statistics' },
+    //{ icon: 'https://cdn-icons-png.flaticon.com/512/87/87578.png', path: '/statistics', title: 'Statistics' },
     { icon: 'https://i.imgur.com/X51XVUz.png', path: '/backlog', title: 'Backlog' },
-    { icon: 'https://i.imgur.com/xQxGLrm.png', path: '/issues', title: 'Issues' },
+    //{ icon: 'https://i.imgur.com/xQxGLrm.png', path: '/issues', title: 'Issues' },
     { icon: 'https://i.imgur.com/XkRHbGU.png', path: '/members', title: 'Members' },
-    { icon: 'https://i.imgur.com/n1IHpmx.png', path: '/meeting', title: 'Meeting' },
+    //{ icon: 'https://i.imgur.com/n1IHpmx.png', path: '/meeting', title: 'Meeting' },
   ];
 
   constructor(
     private translate: TranslateService,
     private observer: BreakpointObserver,
-    private authenticationService: AuthenticationService,
+    //private authenticationService: AuthenticationService,
     private router: Router
   ) {
     // Configuración de traducción
@@ -66,7 +66,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     // Observando el estado de la autenticación
-    this.authenticationService.isSignedIn.subscribe(
+    /*this.authenticationService.isSignedIn.subscribe(
       (isSignedIn) => {
         this.isSignedIn = isSignedIn;
         // Si el usuario no está autenticado, redirigimos a la página de inicio de sesión
@@ -74,7 +74,8 @@ export class AppComponent implements OnInit {
           this.router.navigate(['/sign-in']);
         }
       }
-    );
+    );*/
+    this.router.navigate(['/members']);
 
     // Configuración de la vista de Sidenav dependiendo del tamaño de la pantalla
     this.observer.observe(['(max-width: 1280px)']).subscribe((response) => {
@@ -85,8 +86,5 @@ export class AppComponent implements OnInit {
         this.sidenav.mode = 'side';
         this.sidenav.open();
       }
-    });
+    });}
   }
-
-
-}
