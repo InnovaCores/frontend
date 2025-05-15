@@ -10,6 +10,9 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
   templateUrl: './language-switcher.component.html',
   styleUrls: ['./language-switcher.component.css'] // Corrige "styleUrl" a "styleUrls"
 })
+
+  // i18n: actualizamos la localización de la UI al cambiar el idioma del usuario
+
 export class LanguageSwitcherComponent {
   currentLang: string = 'en';
   languages: string[] = ['en', 'es'];
