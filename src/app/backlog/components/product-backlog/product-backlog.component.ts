@@ -14,6 +14,7 @@ import { SprintService } from "../../services/sprints.service";
 import {FormsModule} from "@angular/forms";
 
 import { TranslateService } from '@ngx-translate/core';
+import {AuthenticationService} from "../../../iam/services/authentication.service";
 
 
 @Component({
@@ -34,23 +35,29 @@ export class ProductBacklogComponent {
   newSprint: Sprint = new Sprint(0, '', '', 'STARTED', new Date(), new Date());
 
   constructor(private userStoriesService: UserStoriesService,
-              private sprintsService: SprintService) {}
+              private sprintsService: SprintService,
+              private authService: AuthenticationService
+  ) {}
 
   // Cargar todas las historias de usuario
   private getAllUserStories(): void {
-    this.userStoriesService.getAll()
-      .subscribe((response: any) => {
-        this.productBacklog = response.filter((story: UserStory) => story.sprintId == 0);
-        this.usersprints = response;
-      });
+    this.authService.currentUserId.subscribe((userId: number) => {
+      this.userStoriesService.getUserStoryByUserId(userId)
+        .subscribe((response: any) => {
+          this.productBacklog = response.filter((story: UserStory) => story.sprintId == 0);
+          this.usersprints = response;
+        });
+    });
   }
 
   //cargar los sprints
   private getAllSprints(): void {
-    this.sprintsService.getAll()
-      .subscribe((response: any) => {
-        this.sprints = response;
-      });
+    this.authService.currentUserId.subscribe((userId: number) => {
+      this.sprintsService.getSprintByUserId(userId)
+        .subscribe((response: any) => {
+          this.sprints = response;
+        });
+    });
   }
 
   // Metodo para crear un nuevo Sprint
@@ -61,30 +68,35 @@ export class ProductBacklogComponent {
       endDate: formatDate(this.newSprint.endDate, 'yyyy-MM-ddTHH:mm:ss.SSSZ', 'en-US')
     };
 
-    this.sprintsService.create(this.newSprint).subscribe((sprint: Sprint) => {
-      console.log('Sprint creado:', sprint);
-      this.sprintBacklog.forEach(userStory => {
-        userStory.sprintId = sprint.id;
-        const updatedUserStory = {
-          title: userStory.title,
-          description: userStory.description,
-          epicId: userStory.epicId,
-          sprintId: sprint.id,
-          effort: userStory.effort
-        };
-        this.userStoriesService.update(userStory.id, updatedUserStory).subscribe(
-          (updatedUserStory: UserStory) => {
-            console.log('User story actualizada:', updatedUserStory);
-          },
-          (error) => {
-            console.error('Error al actualizar la user story:', error);
-          }
-        );
-      });
-    this.resetSprintForm(); // Restablecer el formulario después de crear el sprint
-      this.getAllSprints();
-    }, (error) => {
-      console.error('Error al crear el sprint:', error);
+    this.authService.currentUserId.subscribe((userId: number) => {
+      this.sprintsService.create(userId, this.newSprint).subscribe(
+        (sprint: Sprint) => {
+          console.log('Sprint creado:', sprint);
+          this.sprintBacklog.forEach(userStory => {
+            userStory.sprintId = sprint.id;
+            const updatedUserStory = {
+              title: userStory.title,
+              description: userStory.description,
+              epicId: userStory.epicId,
+              sprintId: sprint.id,
+              effort: userStory.effort
+            };
+            this.userStoriesService.update(userStory.id, updatedUserStory).subscribe(
+              (updatedUserStory: UserStory) => {
+                console.log('User story actualizada:', updatedUserStory);
+              },
+              (error) => {
+                console.error('Error al actualizar la user story:', error);
+              }
+            );
+          });
+          this.resetSprintForm(); // Restablecer el formulario después de crear el sprint
+          this.getAllSprints();
+        },
+        (error) => {
+          console.error('Error al crear el sprint:', error);
+        }
+      );
     });
   }
 
