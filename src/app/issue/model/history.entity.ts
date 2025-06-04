@@ -1,3 +1,4 @@
+//Class History
 export class History {
     id: number;
     createdDate: string;
