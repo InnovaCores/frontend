@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input'; // Módulo de inputs d
 import { MatFormFieldModule } from '@angular/material/form-field'; // Módulo para campos de formularios de Angular Material
 import { TranslateService } from '@ngx-translate/core';
 import { TranslateModule } from '@ngx-translate/core';
-
+//issuelist
 @Component({
   selector: 'app-issues-list', // Selector del componente
   standalone: true, // Indica que es un componente autónomo (standalone)
