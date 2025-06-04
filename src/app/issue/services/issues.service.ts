@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from 'rxjs';
 import { Issue } from "../model/issue.entity";
 import { History } from "../model/history.entity";
+//injectable
 @Injectable({
   providedIn: 'root'
 })
