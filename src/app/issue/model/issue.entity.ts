@@ -1,5 +1,5 @@
 import { History } from './history.entity';
-
+//Class Issue
 export class Issue {
     id: number;
     title: string;
