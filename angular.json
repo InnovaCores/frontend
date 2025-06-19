@@ -18,7 +18,6 @@
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
-
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -92,11 +91,23 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
   "cli": {
-    "analytics": "a871d358-4c85-4c44-a657-b68125320153"
+    "analytics": "a871d358-4c85-4c44-a657-b68125320153",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   }
 }
