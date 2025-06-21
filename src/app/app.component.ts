@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
     { icon: 'https://i.imgur.com/X51XVUz.png', path: '/backlog', title: 'Backlog' },
     { icon: 'https://i.imgur.com/xQxGLrm.png', path: '/issues', title: 'Issues' },
     { icon: 'https://i.imgur.com/XkRHbGU.png', path: '/members', title: 'Members' },
-    //{ icon: 'https://i.imgur.com/n1IHpmx.png', path: '/meeting', title: 'Meeting' },
+    { icon: 'https://i.imgur.com/n1IHpmx.png', path: '/meeting', title: 'Meeting' },
   ];
 
   constructor(
