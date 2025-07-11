@@ -53,7 +53,7 @@ export class SignInComponent extends BaseFormComponent implements OnInit, AfterV
     const waitForCaptchaReady = setInterval(() => {
       if (typeof grecaptcha !== 'undefined' && this.captchaElem) {
         this.captchaId = grecaptcha.render(this.captchaElem.nativeElement, {
-          sitekey: '6Lcb4zUrAAAAAOc0qxROmE9k9Cy3b_vUwBLC9ccs',
+          sitekey: '6LegDH4rAAAAAOozJAMH9EnVU81NaF-PLbB1JvUz',
           callback: (token: string) => {
             console.log('Captcha token:', token);
           }
